@@ -1,2 +1,2 @@
 # good-deeds
-A second life for unnecessary things
+Final ComIT project using Python and Django to build a website for various donations
