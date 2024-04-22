@@ -7,10 +7,20 @@ This website provides an opportunity to give things a second life. This project 
 - Pillow
 - Pipenv
 
-## Running Program
+## Installation of dependencies
+```
+pipenv install python3 django pillow
+```
+
+## Launching the program
 ```
 pipenv shell
 ```
 ```
 python3 manage.py runserver
+```
+
+## Create a superuser for Django Admin
+```
+python3 manage.py createsuperuser
 ```
