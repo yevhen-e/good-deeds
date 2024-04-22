@@ -1,9 +1,10 @@
 # GoodDeeds
-This website provides an opportunity to give things a second life. This project was written using Python 3 and Django Framework.
+This website provides an opportunity to give things a second life. This project was written using Python 3, Django Framework and Bootstrap.
 
 ## Requirements
 - Python 3.12
 - Django Framework
+- Bootstrap-5.3.3
 - Pillow
 - Pipenv
 

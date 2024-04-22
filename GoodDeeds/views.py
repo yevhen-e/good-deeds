@@ -1,7 +1,5 @@
 from django.views.generic import TemplateView
 from django.template.defaulttags import register
-from django.db.models import Count
-
 
 from catalog.models import Item, Image, Category
 
