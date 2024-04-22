@@ -20,7 +20,7 @@ pipenv shell
 python3 manage.py runserver
 ```
 
-## Create a superuser for Django Admin
+## Creating a superuser for Django Admin
 ```
 python3 manage.py createsuperuser
 ```
