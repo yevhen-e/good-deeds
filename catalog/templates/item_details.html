@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{item.name}} details{% endblock title %}
+{% block main %}
+<div class='d-flex'>
+    {% if images %}
+        <div id="carouselImageIndicators" class="carousel slide bg-body-secondary w-50 d-flex justify-content-center align-items-center">
+            <div class="carousel-indicators">
+                {% for image in images %}
+                    {% if forloop.first %}
+                        <button type="button" data-bs-target="#carouselImageIndicators" data-bs-slide-to="{{forloop.counter0}}" class="active" aria-current="true" aria-label="Image {{forloop.counter0}}"></button>
+                    {% else %}
+                        <button type="button" data-bs-target="#carouselImageIndicators" data-bs-slide-to="{{forloop.counter0}}" aria-label="Image {{forloop.counter0}}"></button>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for image in images %}
+                    {% if forloop.first %}
+                        <div class="carousel-item active">
+                        <img src='/media/{{image.image_path}}' class="d-block w-100" alt="Image {{forloop.counter0}}">
+                        </div>
+                    {% else %}
+                        <div class="carousel-item">
+                        <img src='/media/{{image.image_path}}' class="d-block w-100" alt="Image {{forloop.counter0}}">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if images|length > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselImageIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselImageIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            {% endif %}
+            </div>
+        {% else %}
+        <div class="w-50 flex-grow-1 justify-content-center align-items-center">
+            <img src='{% static "img/no-image-icon.png" %}' class="w-100" alt='Image'>
+        </div>
+        {% endif %}
+    <div class="mx-5 w-50">
+        <div class="col-12">
+            <h1>{{item.title}}</h1>
+        </div>
+        <div class="col-12">
+            <label><strong>Description</strong></label>
+            <p>{{item.description}}</p>
+        </div>
+        <div class="col-12">
+            <label><strong>Author</strong></label>
+            <p><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href='#'>{{item.author}}</a></p>
+        </div>
+        <div class="col-12">
+            <label><strong>Location</strong></label>
+            <p>{{item.location}}</p>
+        </div>
+        <div class="col-12">
+            <label><strong>Publication date</strong></label>
+            <p>{{item.pub_date}}</p>
+        </div>
+        <div class="col-6">
+            <form class="row">
+                <div class="mb-2">
+                    <label for="text_message" class="form-label"><strong>Send message</strong></label>
+                    <textarea class="form-control" placeholder="Write a message" id="text_message" rows="3"></textarea>
+                </div>            
+                <div class="d-grid gap-3 col-12 ">
+                    <button type="submit" class="btn btn-primary ">Send message</button>
+                </div>
+            </form>
+        </div>
+</div>   
+</div> 
+{% endblock main %}

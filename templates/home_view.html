@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Good Deeds{% endblock title %}
+
+{% block main %}
+
+{% if image_dict|length > 1 %}
+
+
+<div id="carouselImageAuto" class="carousel slide w-100 bg-body-tertiary" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for key, value in image_dict.items %}
+            {% if forloop.first %}
+                <button type="button" data-bs-target="#carouselImageAuto" data-bs-slide-to="{{forloop.counter0}}" class="active" aria-current="true" aria-label="Image {{forloop.counter0}}"></button>
+            {% else %}
+                <button type="button" data-bs-target="#carouselImageAuto" data-bs-slide-to="{{forloop.counter0}}" aria-label="Image {{forloop.counter0}}"></button>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="carousel-inner">
+        {% for key, value in image_dict.items %}
+            {% if forloop.first %}
+                <a href="{% url 'item_details' key %}">
+                    <div class="carousel-item active w-100">
+                    <img src='/media/{{ value }}' class="d-block rounded mx-auto " height=300  alt="Image {{forloop.counter0}}">
+                    </div>
+                </a>
+            {% else %}
+                <a href="{% url 'item_details' key %}">
+                    <div class="carousel-item w-100">
+                    <img src='/media/{{ value }}' class="d-block rounded mx-auto " height=300 alt="Image {{forloop.counter0}}">
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if image_dict|length > 1 %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImageAuto" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselImageAuto" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    {% endif %}
+</div>
+{% else %}
+<img src='{% static "img/no-image-icon.png" %}' class="img-thumbnail w-100" alt='No image'>
+{% endif %}
+<br>
+<div class='row w-100  justify-content-center'>
+{% for category in categories %}
+    <div class="card col-md-2 m-3">
+        <a href="{% url 'items_list' category.id %}" class="list-group-item list-group-item-action">
+            <div>
+                {% if category.image_path %}
+                    <img src="/media/{{ category.image_path }}" class="card-img-top p-5" alt=".Category image">
+                {% else %}
+                    <img src='{% static "img/no-image-icon.png" %}' class="card-img-top p-5" alt='No image'>
+                {% endif %}
+                <div class="card-body mx-auto h5">
+                    <p class="card-title text-center">            
+                        {{category.name}} 
+                        {% if countItemsByCategories|get_dict_value:category.id %}
+                            <span class="badge text-bg-secondary rounded-pill">{{ countItemsByCategories|get_dict_value:category.id }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}
+</div>
+{% endblock main %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Categories{% endblock title %}
+
+{% block main %}
+
+<div class='row w-100  justify-content-center'>
+{% for category in categories %}
+    <div class="card col-md-2 m-3">
+        <a href="{% url 'items_list' category.id %}" class="list-group-item list-group-item-action">
+            <div>
+                {% if category.image_path %}
+                    <img src="/media/{{ category.image_path }}" class="card-img-top p-5" alt=".Category image">
+                {% else %}
+                    <img src='{% static "img/no-image-icon.png" %}' class="card-img-top p-5" alt='No image'>
+                {% endif %}
+                <div class="card-body mx-auto h5">
+                    <p class="card-title text-center">            
+                        {{category.name}} 
+                        {% if countItemsByCategories|get_dict_value:category.id %}
+                            <span class="badge text-bg-secondary rounded-pill">{{ countItemsByCategories|get_dict_value:category.id }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}
+</div>
+{% endblock main %}
